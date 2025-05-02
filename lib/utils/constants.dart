@@ -6,6 +6,7 @@ const String openAiApiKey = ApiKeys.openAiApiKey;
 
 const String googleBooksBaseUrl = 'https://www.googleapis.com/books/v1';
 const String openAiBaseUrl = 'https://api.openai.com/v1';
+const String fallbackBookCoverUrl = 'https://books.google.com/books/content?id=placeholder&printsec=frontcover&img=1&zoom=1&source=gbs_api';
 
 const String usersCollection = 'users';
 const String reviewsCollection = 'reviews';

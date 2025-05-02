@@ -25,6 +25,9 @@ class BookCard extends StatelessWidget {
   }
 
   Widget _buildVerticalCard(BuildContext context) {
+    // Print for debugging
+    print('Book cover URL for ${book.title}: ${book.coverUrl}');
+    
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -39,19 +42,26 @@ class BookCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: book.coverUrl.isNotEmpty
                       ? book.coverUrl
-                      : 'https://via.placeholder.com/150x225?text=No+Cover',
+                      : fallbackBookCoverUrl,
                   fit: BoxFit.cover,
                   width: double.infinity,
+                  // Add caching parameters
+                  maxHeightDiskCache: 1500,
+                  memCacheWidth: 600,
                   placeholder: (context, url) => Container(
                     color: Colors.grey[300],
                     child: const Center(
                       child: CircularProgressIndicator(),
                     ),
                   ),
-                  errorWidget: (context, url, error) => Container(
-                    color: Colors.grey[300],
-                    child: const Icon(Icons.book, size: 40),
-                  ),
+                  errorWidget: (context, url, error) {
+                    // Print the error for debugging
+                    print('Error loading image from URL: $url - Error: $error');
+                    return Container(
+                      color: Colors.grey[300],
+                      child: const Icon(Icons.book, size: 40),
+                    );
+                  },
                 ),
               ),
             ),
@@ -82,6 +92,9 @@ class BookCard extends StatelessWidget {
   }
 
   Widget _buildHorizontalCard(BuildContext context) {
+    // Print for debugging
+    print('Book cover URL for ${book.title} (horizontal): ${book.coverUrl}');
+    
     return Card(
       margin: const EdgeInsets.only(bottom: smallPadding),
       shape: RoundedRectangleBorder(
@@ -101,10 +114,13 @@ class BookCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: book.coverUrl.isNotEmpty
                     ? book.coverUrl
-                    : 'https://via.placeholder.com/100x150?text=No+Cover',
+                    : fallbackBookCoverUrl,
                 fit: BoxFit.cover,
                 width: 100,
                 height: 150,
+                // Add caching parameters
+                maxHeightDiskCache: 1500,
+                memCacheWidth: 600,
                 placeholder: (context, url) => Container(
                   color: Colors.grey[300],
                   width: 100,
@@ -113,12 +129,16 @@ class BookCard extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 ),
-                errorWidget: (context, url, error) => Container(
-                  color: Colors.grey[300],
-                  width: 100,
-                  height: 150,
-                  child: const Icon(Icons.book, size: 40),
-                ),
+                errorWidget: (context, url, error) {
+                  // Print the error for debugging
+                  print('Error loading horizontal image from URL: $url - Error: $error');
+                  return Container(
+                    color: Colors.grey[300],
+                    width: 100,
+                    height: 150,
+                    child: const Icon(Icons.book, size: 40),
+                  );
+                },
               ),
             ),
             Expanded(

@@ -24,12 +24,25 @@ class Book {
   });
 
   factory Book.fromJson(Map<String, dynamic> json) {
+    // Extract and fix the cover URL
+    String coverUrl = json['imageLinks']?['thumbnail'] ?? '';
+    
+    // Force HTTPS protocol
+    if (coverUrl.startsWith('http:')) {
+      coverUrl = coverUrl.replaceFirst('http:', 'https:');
+    }
+    
+    // Add zoom parameter for higher quality if not present
+    if (coverUrl.isNotEmpty && !coverUrl.contains('zoom=')) {
+      coverUrl += coverUrl.contains('?') ? '&zoom=1' : '?zoom=1';
+    }
+    
     return Book(
       id: json['id'],
       title: json['title'],
       author: json['authors']?[0] ?? 'Unknown Author',
       description: json['description'] ?? 'No description available',
-      coverUrl: json['imageLinks']?['thumbnail'] ?? '',
+      coverUrl: coverUrl,
       genre: json['categories']?[0] ?? 'Uncategorized',
       averageRating: (json['averageRating'] ?? 0).toDouble(),
       totalRatings: json['ratingsCount'] ?? 0,
