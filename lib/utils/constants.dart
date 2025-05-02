@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-const String googleBooksApiKey = 'AIzaSyBzYCEzGO4DMQ7ApNNSM2cYXGz_avTUOkQ';
-const String openAiApiKey = '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';
+import '../config/api_keys.dart';
+
+const String googleBooksApiKey = ApiKeys.googleBooksApiKey;
+const String openAiApiKey = ApiKeys.openAiApiKey;
 
 const String googleBooksBaseUrl = 'https://www.googleapis.com/books/v1';
 const String openAiBaseUrl = 'https://api.openai.com/v1';
+
 const String usersCollection = 'users';
 const String reviewsCollection = 'reviews';
 const String readingListsCollection = 'readingLists';
