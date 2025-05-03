@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
+// Define missing constants
+const Color darkBackgroundColor = Color(0xFF121212);
+const Color darkCardColor = Color(0xFF1E1E1E);
+const Color secondaryAccentColor = Color(0xFF03DAC6);
+const TextStyle bodyStyle = TextStyle(
+  fontSize: 16,
+  color: textColor,
+  height: 1.5,
+);
+
 ThemeData _createTheme({
   required Brightness brightness,
   required Color primaryColor,
@@ -20,11 +30,11 @@ ThemeData _createTheme({
     ),
   );
   
-  final buttonPadding = const EdgeInsets.symmetric(
+  const buttonPadding = EdgeInsets.symmetric(
     horizontal: defaultPadding * 1.5,
     vertical: defaultPadding * 0.8,
   );
-  final buttonTextStyle = const TextStyle(
+  const buttonTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 16,
     letterSpacing: 0.5,
@@ -38,24 +48,20 @@ ThemeData _createTheme({
       ? ColorScheme.dark(
           primary: primaryColor,
           secondary: secondaryColor,
-          background: backgroundColor,
           surface: cardColor,
           error: errorColor,
           onPrimary: Colors.white,
           onSecondary: Colors.white,
-          onBackground: Colors.white,
           onSurface: Colors.white,
           onError: Colors.white,
         )
       : ColorScheme.light(
           primary: primaryColor,
           secondary: secondaryColor,
-          background: backgroundColor,
           surface: Colors.white,
           error: errorColor,
           onPrimary: Colors.white,
           onSecondary: Colors.white,
-          onBackground: textColor,
           onSurface: textColor,
           onError: Colors.white,
         ),
